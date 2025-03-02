@@ -29,6 +29,9 @@ public class EmailGeneratorService {
         );
 
         // Do request and get response (we will need the API Key)
+        // make use of web client
+
+
 
         // Return response
 
