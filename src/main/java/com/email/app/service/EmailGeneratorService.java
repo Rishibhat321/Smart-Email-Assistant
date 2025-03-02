@@ -22,8 +22,8 @@ public class EmailGeneratorService {
     private String geminiApiKey;
 
     @Autowired
-    public EmailGeneratorService(WebClient webClient) {
-        this.webClient = webClient;
+    public EmailGeneratorService(WebClient.Builder webClientBuilder) {
+        this.webClient = webClientBuilder.build();
     }
 
     public String generateEmailReply(EmailRequest emailRequest) {
