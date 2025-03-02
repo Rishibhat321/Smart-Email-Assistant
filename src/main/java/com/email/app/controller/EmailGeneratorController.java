@@ -1,5 +1,6 @@
 package com.email.app.controller;
 
+import com.email.app.dto.EmailRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
