@@ -1,6 +1,8 @@
 package com.email.app.service;
 
 import com.email.app.dto.EmailRequest;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -48,10 +50,28 @@ public class EmailGeneratorService {
 
 
         // Return response
-        // Extract the content
-
+        // Extract response and return
+        return extractResponseContent(response);
 
     }
+
+    private String extractResponseContent(String response) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode rootNode = mapper.readTree(response);
+            return rootNode.path("candidates")
+                    .get(0)
+                    .path("content")
+                    .path("parts")
+                    .get(0)
+                    .path("text")
+                    .asText();
+        }
+        catch(Exception exc) {
+            return "Error processing request: " + exc.getMessage();
+        }
+    }
+
 
     private String buildPrompt(EmailRequest emailRequest) {
         StringBuilder prompt = new StringBuilder();
