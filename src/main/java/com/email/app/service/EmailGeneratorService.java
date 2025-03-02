@@ -1,19 +1,28 @@
 package com.email.app.service;
 
 import com.email.app.dto.EmailRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.Map;
 
 @Service
 public class EmailGeneratorService {
 
+    private final WebClient webClient;
+
     @Value("${gemini.api.url}")
     private String geminiApiUrl;
 
     @Value("${gemini.api.key}")
     private String geminiApiKey;
+
+    @Autowired
+    public EmailGeneratorService(WebClient webClient) {
+        this.webClient = webClient;
+    }
 
     public String generateEmailReply(EmailRequest emailRequest) {
         // Build the prompt
@@ -30,7 +39,8 @@ public class EmailGeneratorService {
 
         // Do request and get response (we will need the API Key)
         // make use of web client
-
+        String response = webClient.post()
+                .uri
 
 
         // Return response
