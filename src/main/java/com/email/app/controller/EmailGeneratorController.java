@@ -26,4 +26,5 @@ public class EmailGeneratorController {
         return ResponseEntity.ok(response);
     }
 
+
 }
